@@ -1,0 +1,686 @@
+HOOMD-blue 2.5.2 CUDA (10.1) DOUBLE HPMC_MIXED MPI SSE SSE2 SSE3 SSE4_1 SSE4_2 AVX 
+Compiled: 06/04/2019
+Copyright (c) 2009-2019 The Regents of the University of Michigan.
+-----
+You are using HOOMD-blue. Please cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+-----
+HOOMD-blue is running on the following GPU(s):
+ [0]      GeForce RTX 2060  30 SM_7.5 @ 1.68 GHz, 5933 MiB DRAM, MNG
+hoomd_simulation.py:112  |      hoomd.init.read_snapshot(snapshot)
+notice(2): Group "all" created containing 6000 particles
+hoomd_simulation.py:114  |      nl = hoomd.md.nlist.cell()
+hoomd_simulation.py:115  |      nl.reset_exclusions(exclusions=['1-2', '1-3'])
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 2 exclusions             : 6000
+notice(2): Neighbors included by diameter          : no
+notice(2): Neighbors excluded when in the same body: no
+Processing LJ and QQ
+hoomd_simulation.py:165  |      lj = hoomd.md.pair.lj(r_cut, nl)
+hoomd_simulation.py:167  |          lj.pair_coeff.set(name, name,
+                sigma=atom_type.sigma/ref_distance,
+                epsilon=atom_type.epsilon/ref_energy)
+hoomd_simulation.py:167  |          lj.pair_coeff.set(name, name,
+                sigma=atom_type.sigma/ref_distance,
+                epsilon=atom_type.epsilon/ref_energy)
+hoomd_simulation.py:167  |          lj.pair_coeff.set(name, name,
+                sigma=atom_type.sigma/ref_distance,
+                epsilon=atom_type.epsilon/ref_energy)
+hoomd_simulation.py:199  |          lj.pair_coeff.set(a1, a2, sigma=sigma, epsilon=epsilon)
+hoomd_simulation.py:199  |          lj.pair_coeff.set(a1, a2, sigma=sigma, epsilon=epsilon)
+hoomd_simulation.py:199  |          lj.pair_coeff.set(a1, a2, sigma=sigma, epsilon=epsilon)
+hoomd_simulation.py:199  |          lj.pair_coeff.set(a1, a2, sigma=sigma, epsilon=epsilon)
+hoomd_simulation.py:199  |          lj.pair_coeff.set(a1, a2, sigma=sigma, epsilon=epsilon)
+hoomd_simulation.py:199  |          lj.pair_coeff.set(a1, a2, sigma=sigma, epsilon=epsilon)
+hoomd_simulation.py:205  |      charged = hoomd.group.charged()
+notice(2): Group "charged" created containing 6000 particles
+hoomd_simulation.py:210  |          qq = hoomd.md.charge.pppm(charged, nl)
+-----
+You are using PPPM. Please cite the following:
+* D N LeBard, B G Levine, S A Barr, A Jusufi, S Sanders, M L Klein, and A Z
+  Panagiotopoulos. "Self-assembly of coarse-grained ionic surfactants
+  accelerated by graphics processing units", Journal of Computational Physics 8
+  (2012) 2385-2397
+-----
+hoomd_simulation.py:211  |          qq.set_params(Nx, Ny, Nz, order, r_cut)
+Processing harmonic bonds
+hoomd_simulation.py:266  |      harmonic_bond = hoomd.md.bond.harmonic()
+hoomd_simulation.py:275  |              harmonic_bond.bond_coeff.set(name,
+                k=2 * bond_type.k * ref_distance**2 / ref_energy,
+                r0=bond_type.req / ref_distance)
+hoomd_simulation.py:275  |              harmonic_bond.bond_coeff.set(name,
+                k=2 * bond_type.k * ref_distance**2 / ref_energy,
+                r0=bond_type.req / ref_distance)
+Processing harmonic angles
+hoomd_simulation.py:293  |      harmonic_angle = hoomd.md.angle.harmonic()
+hoomd_simulation.py:295  |          harmonic_angle.angle_coeff.set(name,
+                t0=np.deg2rad(angle_type.theteq),
+                k=2 * angle_type.k / ref_energy)
+HOOMD SimulationContext updated from ParmEd Structure
+alex.py:093  |  nl = hoomd.md.nlist.cell()
+alex.py:094  |  nl.reset_exclusions(['1-2', '1-3', '1-4'])
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 2 exclusions             : 6000
+notice(2): Neighbors included by diameter          : no
+notice(2): Neighbors excluded when in the same body: no
+alex.py:096  |  all = hoomd.group.all()
+alex.py:105  |  md.integrate.mode_standard(dt=0.002)
+alex.py:106  |  nvt = md.integrate.nvt(group=all, kT=2.286476462, tau=1)
+alex.py:107  |  hoomd.analyze.log(filename="analyze2.log",
+                  quantities=['temperature', 'potential_energy','kinetic_energy', 'bond_harmonic_energy', 'pppm_energy', 'pair_lj_energy', 'angle_harmonic_energy','volume', 'pressure'],
+                  period=100,
+                  overwrite=True)
+alex.py:111  |  dump = hoomd.dump.dcd('nvt.dcd', period = 100, overwrite = True)
+alex.py:112  |  hoomd.run(1e5)
+** starting run **
+/home/arjunban/installs/mbuild/mbuild/compound.py:2410: UserWarning: Guessing that "<_CH3 pos=( 6.8756, 1.1424, 7.0081), 0 bonds, id: 140270510346872>" is element: "EP"
+  atom, element))
+/home/arjunban/.conda/envs/mosdef36/lib/python3.6/site-packages/foyer/forcefield.py:395: UserWarning: Non-atomistic element type detected. Creating custom element for _CH4
+  'Creating custom element for {}'.format(element))
+/home/arjunban/.conda/envs/mosdef36/lib/python3.6/site-packages/foyer/forcefield.py:395: UserWarning: Non-atomistic element type detected. Creating custom element for _CH3
+  'Creating custom element for {}'.format(element))
+/home/arjunban/.conda/envs/mosdef36/lib/python3.6/site-packages/foyer/forcefield.py:395: UserWarning: Non-atomistic element type detected. Creating custom element for _CH2
+  'Creating custom element for {}'.format(element))
+/home/arjunban/.conda/envs/mosdef36/lib/python3.6/site-packages/foyer/forcefield.py:395: UserWarning: Non-atomistic element type detected. Creating custom element for _HC
+  'Creating custom element for {}'.format(element))
+/home/arjunban/installs/mbuild/mbuild/utils/decorators.py:21: Warning: write_hoomdxml has breaking change. See PR#463 on github
+  warn(printed_message, Warning)
+*Warning*: charge.pppm: system is not neutral and unscreened interactions are calculated, the net charge is 0.00143051
+*Warning*: charge.pppm: RMS error of 37.4012 is probably too high! 37.4004 37.4012
+Time 00:00:10 | Step 1613 / 100000 | TPS 161.26 | ETA 00:10:10
+Time 00:00:20 | Step 3638 / 100000 | TPS 202.362 | ETA 00:07:56
+Time 00:00:30 | Step 4712 / 100000 | TPS 107.382 | ETA 00:14:47
+Time 00:00:40 | Step 5547 / 100000 | TPS 83.4678 | ETA 00:18:51
+Time 00:00:50 | Step 6417 / 100000 | TPS 86.9491 | ETA 00:17:56
+Time 00:01:00 | Step 7300 / 100000 | TPS 88.2087 | ETA 00:17:30
+Time 00:01:10 | Step 8138 / 100000 | TPS 83.7207 | ETA 00:18:17
+Time 00:01:20 | Step 8835 / 100000 | TPS 69.6527 | ETA 00:21:48
+Time 00:01:30 | Step 9525 / 100000 | TPS 68.9425 | ETA 00:21:52
+Time 00:01:40 | Step 10187 / 100000 | TPS 66.1926 | ETA 00:22:36
+Time 00:01:50 | Step 10840 / 100000 | TPS 65.2953 | ETA 00:22:45
+Time 00:02:00 | Step 11471 / 100000 | TPS 63.017 | ETA 00:23:24
+Time 00:02:10 | Step 12104 / 100000 | TPS 63.2319 | ETA 00:23:10
+Time 00:02:20 | Step 12725 / 100000 | TPS 62.0077 | ETA 00:23:27
+Time 00:02:30 | Step 13297 / 100000 | TPS 57.1732 | ETA 00:25:16
+Time 00:02:40 | Step 13824 / 100000 | TPS 52.6239 | ETA 00:27:17
+Time 00:02:50 | Step 14336 / 100000 | TPS 51.1027 | ETA 00:27:56
+Time 00:03:00 | Step 14822 / 100000 | TPS 48.5461 | ETA 00:29:14
+Time 00:03:10 | Step 15315 / 100000 | TPS 49.2583 | ETA 00:28:39
+Time 00:03:20 | Step 15804 / 100000 | TPS 48.8503 | ETA 00:28:43
+Time 00:03:30 | Step 16317 / 100000 | TPS 51.299 | ETA 00:27:11
+Time 00:03:40 | Step 16821 / 100000 | TPS 50.3681 | ETA 00:27:31
+Time 00:03:50 | Step 17322 / 100000 | TPS 50.0841 | ETA 00:27:30
+Time 00:04:00 | Step 17810 / 100000 | TPS 48.7745 | ETA 00:28:05
+Time 00:04:10 | Step 18301 / 100000 | TPS 48.9899 | ETA 00:27:47
+Time 00:04:20 | Step 18790 / 100000 | TPS 48.8459 | ETA 00:27:42
+Time 00:04:30 | Step 19281 / 100000 | TPS 49.0543 | ETA 00:27:25
+Time 00:04:40 | Step 19761 / 100000 | TPS 47.9881 | ETA 00:27:52
+Time 00:04:50 | Step 20244 / 100000 | TPS 48.2932 | ETA 00:27:31
+Time 00:05:00 | Step 20717 / 100000 | TPS 47.2441 | ETA 00:27:58
+Time 00:05:10 | Step 21196 / 100000 | TPS 47.7568 | ETA 00:27:30
+Time 00:05:20 | Step 21675 / 100000 | TPS 47.8325 | ETA 00:27:17
+Time 00:05:30 | Step 22142 / 100000 | TPS 46.6982 | ETA 00:27:47
+Time 00:05:40 | Step 22613 / 100000 | TPS 47.0129 | ETA 00:27:26
+Time 00:05:50 | Step 23080 / 100000 | TPS 46.6716 | ETA 00:27:28
+Time 00:06:00 | Step 23551 / 100000 | TPS 47.0778 | ETA 00:27:03
+Time 00:06:10 | Step 24025 / 100000 | TPS 47.307 | ETA 00:26:45
+Time 00:06:20 | Step 24484 / 100000 | TPS 45.833 | ETA 00:27:27
+Time 00:06:30 | Step 24950 / 100000 | TPS 46.5422 | ETA 00:26:52
+Time 00:06:40 | Step 25407 / 100000 | TPS 45.6123 | ETA 00:27:15
+Time 00:06:50 | Step 25867 / 100000 | TPS 45.9909 | ETA 00:26:51
+Time 00:07:00 | Step 26331 / 100000 | TPS 46.3187 | ETA 00:26:30
+Time 00:07:10 | Step 26782 / 100000 | TPS 45.0058 | ETA 00:27:06
+Time 00:07:20 | Step 27233 / 100000 | TPS 44.9915 | ETA 00:26:57
+Time 00:07:30 | Step 27682 / 100000 | TPS 44.8905 | ETA 00:26:50
+Time 00:07:40 | Step 28136 / 100000 | TPS 45.2172 | ETA 00:26:29
+Time 00:07:50 | Step 28588 / 100000 | TPS 45.1075 | ETA 00:26:23
+Time 00:08:00 | Step 29037 / 100000 | TPS 44.8896 | ETA 00:26:20
+Time 00:08:10 | Step 29478 / 100000 | TPS 44.037 | ETA 00:26:41
+Time 00:08:20 | Step 29915 / 100000 | TPS 43.6212 | ETA 00:26:46
+Time 00:08:30 | Step 30348 / 100000 | TPS 43.2505 | ETA 00:26:50
+Time 00:08:40 | Step 30783 / 100000 | TPS 43.4812 | ETA 00:26:31
+Time 00:08:50 | Step 31214 / 100000 | TPS 43.0765 | ETA 00:26:36
+Time 00:09:00 | Step 31651 / 100000 | TPS 43.6725 | ETA 00:26:05
+Time 00:09:10 | Step 32080 / 100000 | TPS 42.8124 | ETA 00:26:26
+Time 00:09:20 | Step 32503 / 100000 | TPS 42.2633 | ETA 00:26:37
+Time 00:09:30 | Step 32926 / 100000 | TPS 42.2659 | ETA 00:26:26
+Time 00:09:40 | Step 33352 / 100000 | TPS 42.5344 | ETA 00:26:06
+Time 00:09:50 | Step 33778 / 100000 | TPS 42.5091 | ETA 00:25:57
+Time 00:10:00 | Step 34198 / 100000 | TPS 41.9992 | ETA 00:26:06
+Time 00:10:10 | Step 34616 / 100000 | TPS 41.7287 | ETA 00:26:06
+Time 00:10:20 | Step 35034 / 100000 | TPS 41.7721 | ETA 00:25:55
+Time 00:10:30 | Step 35451 / 100000 | TPS 41.6612 | ETA 00:25:49
+Time 00:10:40 | Step 35869 / 100000 | TPS 41.7031 | ETA 00:25:37
+Time 00:10:50 | Step 36284 / 100000 | TPS 41.4687 | ETA 00:25:36
+Time 00:11:00 | Step 36698 / 100000 | TPS 41.3955 | ETA 00:25:29
+Time 00:11:10 | Step 37113 / 100000 | TPS 41.4371 | ETA 00:25:17
+Time 00:11:20 | Step 37531 / 100000 | TPS 41.7586 | ETA 00:24:55
+Time 00:11:30 | Step 37950 / 100000 | TPS 41.826 | ETA 00:24:43
+Time 00:11:40 | Step 38365 / 100000 | TPS 41.4756 | ETA 00:24:46
+Time 00:11:50 | Step 38778 / 100000 | TPS 41.2524 | ETA 00:24:44
+Time 00:12:00 | Step 39193 / 100000 | TPS 41.4389 | ETA 00:24:27
+Time 00:12:10 | Step 39606 / 100000 | TPS 41.2897 | ETA 00:24:22
+Time 00:12:20 | Step 40019 / 100000 | TPS 41.2095 | ETA 00:24:15
+Time 00:12:31 | Step 40430 / 100000 | TPS 41.0288 | ETA 00:24:11
+Time 00:12:41 | Step 40840 / 100000 | TPS 40.9206 | ETA 00:24:05
+Time 00:12:51 | Step 41250 / 100000 | TPS 40.9528 | ETA 00:23:54
+Time 00:13:01 | Step 41661 / 100000 | TPS 41.0665 | ETA 00:23:40
+Time 00:13:11 | Step 42073 / 100000 | TPS 41.1377 | ETA 00:23:28
+Time 00:13:21 | Step 42488 / 100000 | TPS 41.4944 | ETA 00:23:06
+Time 00:13:31 | Step 42911 / 100000 | TPS 42.2274 | ETA 00:22:31
+Time 00:13:41 | Step 43330 / 100000 | TPS 41.8795 | ETA 00:22:33
+Time 00:13:51 | Step 43752 / 100000 | TPS 42.145 | ETA 00:22:14
+Time 00:14:01 | Step 44174 / 100000 | TPS 42.1534 | ETA 00:22:04
+Time 00:14:11 | Step 44596 / 100000 | TPS 42.165 | ETA 00:21:53
+Time 00:14:21 | Step 45008 / 100000 | TPS 41.1332 | ETA 00:22:16
+Time 00:14:31 | Step 45426 / 100000 | TPS 41.7808 | ETA 00:21:46
+Time 00:14:41 | Step 45848 / 100000 | TPS 42.0774 | ETA 00:21:26
+Time 00:14:51 | Step 46274 / 100000 | TPS 42.5469 | ETA 00:21:02
+Time 00:15:01 | Step 46704 / 100000 | TPS 42.9708 | ETA 00:20:40
+Time 00:15:11 | Step 47134 / 100000 | TPS 42.9491 | ETA 00:20:30
+Time 00:15:21 | Step 47557 / 100000 | TPS 42.2605 | ETA 00:20:40
+Time 00:15:31 | Step 47970 / 100000 | TPS 41.2449 | ETA 00:21:01
+Time 00:15:41 | Step 48381 / 100000 | TPS 41.0774 | ETA 00:20:56
+Time 00:15:51 | Step 48794 / 100000 | TPS 41.208 | ETA 00:20:42
+Time 00:16:01 | Step 49205 / 100000 | TPS 41.0773 | ETA 00:20:36
+Time 00:16:11 | Step 49620 / 100000 | TPS 41.4926 | ETA 00:20:14
+Time 00:16:21 | Step 50036 / 100000 | TPS 41.5569 | ETA 00:20:02
+Time 00:16:31 | Step 50451 / 100000 | TPS 41.4058 | ETA 00:19:56
+Time 00:16:41 | Step 50868 / 100000 | TPS 41.6918 | ETA 00:19:38
+Time 00:16:51 | Step 51291 / 100000 | TPS 42.2276 | ETA 00:19:13
+Time 00:17:01 | Step 51709 / 100000 | TPS 41.7879 | ETA 00:19:15
+Time 00:17:11 | Step 52129 / 100000 | TPS 41.9712 | ETA 00:19:00
+Time 00:17:21 | Step 52549 / 100000 | TPS 41.9718 | ETA 00:18:50
+Time 00:17:31 | Step 52970 / 100000 | TPS 42.0209 | ETA 00:18:39
+Time 00:17:41 | Step 53394 / 100000 | TPS 42.3974 | ETA 00:18:19
+Time 00:17:51 | Step 53818 / 100000 | TPS 42.3695 | ETA 00:18:09
+Time 00:18:01 | Step 54238 / 100000 | TPS 41.9412 | ETA 00:18:11
+Time 00:18:11 | Step 54660 / 100000 | TPS 42.1852 | ETA 00:17:54
+Time 00:18:21 | Step 55090 / 100000 | TPS 42.9024 | ETA 00:17:26
+Time 00:18:31 | Step 55520 / 100000 | TPS 42.9966 | ETA 00:17:14
+Time 00:18:41 | Step 55951 / 100000 | TPS 43.0417 | ETA 00:17:03
+Time 00:18:51 | Step 56382 / 100000 | TPS 43.0529 | ETA 00:16:53
+Time 00:19:01 | Step 56812 / 100000 | TPS 42.9228 | ETA 00:16:46
+Time 00:19:11 | Step 57241 / 100000 | TPS 42.8632 | ETA 00:16:37
+Time 00:19:21 | Step 57668 / 100000 | TPS 42.6613 | ETA 00:16:32
+Time 00:19:31 | Step 58097 / 100000 | TPS 42.8906 | ETA 00:16:16
+Time 00:19:41 | Step 58527 / 100000 | TPS 42.9959 | ETA 00:16:04
+Time 00:19:51 | Step 58958 / 100000 | TPS 43.0889 | ETA 00:15:52
+Time 00:20:01 | Step 59389 / 100000 | TPS 43.0872 | ETA 00:15:42
+Time 00:20:11 | Step 59821 / 100000 | TPS 43.1734 | ETA 00:15:30
+Time 00:20:21 | Step 60252 / 100000 | TPS 43.0954 | ETA 00:15:22
+Time 00:20:31 | Step 60681 / 100000 | TPS 42.8119 | ETA 00:15:18
+Time 00:20:41 | Step 61109 / 100000 | TPS 42.7835 | ETA 00:15:09
+Time 00:20:51 | Step 61538 / 100000 | TPS 42.8038 | ETA 00:14:58
+Time 00:21:01 | Step 61966 / 100000 | TPS 42.7912 | ETA 00:14:48
+Time 00:21:11 | Step 62394 / 100000 | TPS 42.7143 | ETA 00:14:40
+Time 00:21:21 | Step 62822 / 100000 | TPS 42.7065 | ETA 00:14:30
+Time 00:21:31 | Step 63251 / 100000 | TPS 42.818 | ETA 00:14:18
+Time 00:21:41 | Step 63680 / 100000 | TPS 42.8397 | ETA 00:14:07
+Time 00:21:51 | Step 64108 / 100000 | TPS 42.7741 | ETA 00:13:59
+Time 00:22:01 | Step 64536 / 100000 | TPS 42.7706 | ETA 00:13:49
+Time 00:22:11 | Step 64964 / 100000 | TPS 42.7282 | ETA 00:13:39
+Time 00:22:21 | Step 65392 / 100000 | TPS 42.7627 | ETA 00:13:29
+Time 00:22:31 | Step 65818 / 100000 | TPS 42.574 | ETA 00:13:22
+Time 00:22:41 | Step 66247 / 100000 | TPS 42.8728 | ETA 00:13:07
+Time 00:22:51 | Step 66674 / 100000 | TPS 42.6773 | ETA 00:13:00
+Time 00:23:01 | Step 67103 / 100000 | TPS 42.8219 | ETA 00:12:48
+Time 00:23:11 | Step 67530 / 100000 | TPS 42.6545 | ETA 00:12:41
+Time 00:23:21 | Step 67957 / 100000 | TPS 42.6896 | ETA 00:12:30
+Time 00:23:31 | Step 68383 / 100000 | TPS 42.5034 | ETA 00:12:23
+Time 00:23:41 | Step 68808 / 100000 | TPS 42.475 | ETA 00:12:14
+Time 00:23:51 | Step 69235 / 100000 | TPS 42.6223 | ETA 00:12:01
+Time 00:24:01 | Step 69660 / 100000 | TPS 42.4965 | ETA 00:11:53
+Time 00:24:11 | Step 70086 / 100000 | TPS 42.5583 | ETA 00:11:42
+Time 00:24:21 | Step 70510 / 100000 | TPS 42.3571 | ETA 00:11:36
+Time 00:24:31 | Step 70935 / 100000 | TPS 42.4033 | ETA 00:11:25
+Time 00:24:41 | Step 71358 / 100000 | TPS 42.2363 | ETA 00:11:18
+Time 00:24:51 | Step 71778 / 100000 | TPS 41.9059 | ETA 00:11:13
+Time 00:25:01 | Step 72200 / 100000 | TPS 42.1125 | ETA 00:11:00
+Time 00:25:11 | Step 72621 / 100000 | TPS 42.0509 | ETA 00:10:51
+Time 00:25:21 | Step 73044 / 100000 | TPS 42.2897 | ETA 00:10:37
+Time 00:25:31 | Step 73470 / 100000 | TPS 42.5207 | ETA 00:10:23
+Time 00:25:41 | Step 73896 / 100000 | TPS 42.5524 | ETA 00:10:13
+Time 00:25:51 | Step 74323 / 100000 | TPS 42.6801 | ETA 00:10:01
+Time 00:26:01 | Step 74748 / 100000 | TPS 42.4685 | ETA 00:09:54
+Time 00:26:11 | Step 75173 / 100000 | TPS 42.4834 | ETA 00:09:44
+Time 00:26:21 | Step 75598 / 100000 | TPS 42.4538 | ETA 00:09:34
+Time 00:26:31 | Step 76024 / 100000 | TPS 42.5494 | ETA 00:09:23
+Time 00:26:41 | Step 76450 / 100000 | TPS 42.5092 | ETA 00:09:13
+Time 00:26:51 | Step 76872 / 100000 | TPS 42.1406 | ETA 00:09:08
+Time 00:27:01 | Step 77294 / 100000 | TPS 42.1924 | ETA 00:08:58
+Time 00:27:11 | Step 77717 / 100000 | TPS 42.2125 | ETA 00:08:47
+Time 00:27:21 | Step 78140 / 100000 | TPS 42.2413 | ETA 00:08:37
+Time 00:27:31 | Step 78565 / 100000 | TPS 42.4868 | ETA 00:08:24
+Time 00:27:41 | Step 78990 / 100000 | TPS 42.4442 | ETA 00:08:15
+Time 00:27:52 | Step 79415 / 100000 | TPS 42.4765 | ETA 00:08:04
+Time 00:28:02 | Step 79838 / 100000 | TPS 42.207 | ETA 00:07:57
+Time 00:28:12 | Step 80260 / 100000 | TPS 42.1278 | ETA 00:07:48
+Time 00:28:22 | Step 80682 / 100000 | TPS 42.1631 | ETA 00:07:38
+Time 00:28:32 | Step 81104 / 100000 | TPS 42.1457 | ETA 00:07:28
+Time 00:28:42 | Step 81527 / 100000 | TPS 42.2281 | ETA 00:07:17
+Time 00:28:52 | Step 81948 / 100000 | TPS 42.0651 | ETA 00:07:09
+Time 00:29:02 | Step 82368 / 100000 | TPS 41.9369 | ETA 00:07:00
+Time 00:29:12 | Step 82789 / 100000 | TPS 42.0319 | ETA 00:06:49
+Time 00:29:22 | Step 83210 / 100000 | TPS 42.0642 | ETA 00:06:39
+Time 00:29:32 | Step 83631 / 100000 | TPS 42.0277 | ETA 00:06:29
+Time 00:29:42 | Step 84051 / 100000 | TPS 41.9507 | ETA 00:06:20
+Time 00:29:52 | Step 84470 / 100000 | TPS 41.8778 | ETA 00:06:10
+Time 00:30:02 | Step 84890 / 100000 | TPS 41.962 | ETA 00:06:00
+Time 00:30:12 | Step 85309 / 100000 | TPS 41.89 | ETA 00:05:50
+Time 00:30:22 | Step 85729 / 100000 | TPS 41.9773 | ETA 00:05:39
+Time 00:30:32 | Step 86149 / 100000 | TPS 41.9213 | ETA 00:05:30
+Time 00:30:42 | Step 86567 / 100000 | TPS 41.7532 | ETA 00:05:21
+Time 00:30:52 | Step 86984 / 100000 | TPS 41.6924 | ETA 00:05:12
+Time 00:31:02 | Step 87401 / 100000 | TPS 41.6784 | ETA 00:05:02
+Time 00:31:12 | Step 87820 / 100000 | TPS 41.8457 | ETA 00:04:51
+Time 00:31:22 | Step 88240 / 100000 | TPS 41.9169 | ETA 00:04:40
+Time 00:31:32 | Step 88659 / 100000 | TPS 41.8867 | ETA 00:04:30
+Time 00:31:42 | Step 89079 / 100000 | TPS 41.992 | ETA 00:04:20
+Time 00:31:52 | Step 89498 / 100000 | TPS 41.8943 | ETA 00:04:10
+Time 00:32:02 | Step 89918 / 100000 | TPS 41.9358 | ETA 00:04:00
+Time 00:32:12 | Step 90338 / 100000 | TPS 41.9414 | ETA 00:03:50
+Time 00:32:22 | Step 90758 / 100000 | TPS 41.9444 | ETA 00:03:40
+Time 00:32:32 | Step 91178 / 100000 | TPS 41.953 | ETA 00:03:30
+Time 00:32:42 | Step 91598 / 100000 | TPS 41.9649 | ETA 00:03:20
+Time 00:32:52 | Step 92020 / 100000 | TPS 42.1103 | ETA 00:03:09
+Time 00:33:02 | Step 92441 / 100000 | TPS 42.0656 | ETA 00:02:59
+Time 00:33:12 | Step 92861 / 100000 | TPS 41.9812 | ETA 00:02:50
+Time 00:33:22 | Step 93282 / 100000 | TPS 42.0216 | ETA 00:02:39
+Time 00:33:32 | Step 93702 / 100000 | TPS 41.969 | ETA 00:02:30
+Time 00:33:42 | Step 94120 / 100000 | TPS 41.7885 | ETA 00:02:20
+Time 00:33:52 | Step 94539 / 100000 | TPS 41.8254 | ETA 00:02:10
+Time 00:34:02 | Step 94959 / 100000 | TPS 41.9292 | ETA 00:02:00
+Time 00:34:12 | Step 95379 / 100000 | TPS 41.9377 | ETA 00:01:50
+Time 00:34:22 | Step 95797 / 100000 | TPS 41.7894 | ETA 00:01:40
+Time 00:34:32 | Step 96214 / 100000 | TPS 41.6995 | ETA 00:01:30
+Time 00:34:42 | Step 96632 / 100000 | TPS 41.715 | ETA 00:01:20
+Time 00:34:52 | Step 97050 / 100000 | TPS 41.7052 | ETA 00:01:10
+Time 00:35:02 | Step 97470 / 100000 | TPS 41.9631 | ETA 00:01:00
+Time 00:35:12 | Step 97890 / 100000 | TPS 41.9769 | ETA 00:00:50
+Time 00:35:22 | Step 98310 / 100000 | TPS 41.9502 | ETA 00:00:40
+Time 00:35:32 | Step 98727 / 100000 | TPS 41.6088 | ETA 00:00:30
+Time 00:35:42 | Step 99143 / 100000 | TPS 41.5689 | ETA 00:00:20
+Time 00:35:52 | Step 99561 / 100000 | TPS 41.706 | ETA 00:00:10
+Time 00:36:01 | Step 100000 / 100000 | TPS 49.5881 | ETA 00:00:00
+Average TPS: 46.27
+---------
+-- Neighborlist stats:
+1862 normal updates / 334 forced updates / 0 dangerous updates
+n_neigh_min: 70 / n_neigh_max: 819 / n_neigh_avg: 550.581
+shortest rebuild period: 3
+-- Cell list stats:
+Dimension: 5, 5, 5
+n_min    : 0 / n_max: 201 / n_avg: 48
+-- Neighborlist stats:
+0 normal updates / 0 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 0 / n_neigh_avg: 0
+shortest rebuild period: 100
+-- Cell list stats:
+Dimension: 0, 0, 0
+** run complete **
+alex.py:113  |  dump.disable()
+SWITCHING TO NPT
+alex.py:115  |  nvt.disable()
+alex.py:116  |  npt = md.integrate.npt(group=all, kT=2.286476462, tau=1, P=0.062, tauP=10)
+alex.py:117  |  hoomd.analyze.log(filename="analyze.log",
+                  quantities=['temperature', 'potential_energy','kinetic_energy', 'bond_harmonic_energy', 'pppm_energy', 'pair_lj_energy', 'angle_harmonic_energy','volume','pressure'],
+                  period=100,
+                  overwrite=True)
+alex.py:121  |  hoomd.dump.dcd('npt.dcd', period = 100, overwrite = True)
+alex.py:122  |  hoomd.run(1e5)
+** starting run **
+Time 00:36:11 | Step 100342 / 200000 | TPS 34.1515 | ETA 00:48:38
+Time 00:36:21 | Step 100737 / 200000 | TPS 39.4175 | ETA 00:41:58
+Time 00:36:31 | Step 101076 / 200000 | TPS 33.8439 | ETA 00:48:42
+Time 00:36:41 | Step 101407 / 200000 | TPS 33.0967 | ETA 00:49:38
+Time 00:36:51 | Step 101804 / 200000 | TPS 39.6153 | ETA 00:41:18
+Time 00:37:01 | Step 102193 / 200000 | TPS 38.8377 | ETA 00:41:58
+Time 00:37:11 | Step 102565 / 200000 | TPS 37.1911 | ETA 00:43:39
+Time 00:37:21 | Step 102935 / 200000 | TPS 36.9545 | ETA 00:43:46
+Time 00:37:31 | Step 103306 / 200000 | TPS 37.0965 | ETA 00:43:26
+Time 00:37:41 | Step 103674 / 200000 | TPS 36.7949 | ETA 00:43:37
+Time 00:37:51 | Step 104040 / 200000 | TPS 36.571 | ETA 00:43:43
+Time 00:38:01 | Step 104407 / 200000 | TPS 36.621 | ETA 00:43:30
+Time 00:38:11 | Step 104773 / 200000 | TPS 36.5652 | ETA 00:43:24
+Time 00:38:21 | Step 105138 / 200000 | TPS 36.4761 | ETA 00:43:20
+Time 00:38:31 | Step 105501 / 200000 | TPS 36.2498 | ETA 00:43:26
+Time 00:38:41 | Step 105865 / 200000 | TPS 36.3955 | ETA 00:43:06
+Time 00:38:51 | Step 106227 / 200000 | TPS 36.1805 | ETA 00:43:11
+Time 00:39:01 | Step 106587 / 200000 | TPS 35.9928 | ETA 00:43:15
+Time 00:39:11 | Step 106950 / 200000 | TPS 36.2388 | ETA 00:42:47
+Time 00:39:21 | Step 107317 / 200000 | TPS 36.6077 | ETA 00:42:11
+Time 00:39:31 | Step 107673 / 200000 | TPS 35.532 | ETA 00:43:18
+Time 00:39:41 | Step 108020 / 200000 | TPS 34.6584 | ETA 00:44:13
+Time 00:39:51 | Step 108376 / 200000 | TPS 35.5414 | ETA 00:42:57
+Time 00:40:01 | Step 108731 / 200000 | TPS 35.4694 | ETA 00:42:53
+Time 00:40:11 | Step 109082 / 200000 | TPS 35.0831 | ETA 00:43:11
+Time 00:40:21 | Step 109432 / 200000 | TPS 34.9873 | ETA 00:43:08
+Time 00:40:31 | Step 109783 / 200000 | TPS 34.9999 | ETA 00:42:57
+Time 00:40:41 | Step 110133 / 200000 | TPS 34.907 | ETA 00:42:54
+Time 00:40:51 | Step 110492 / 200000 | TPS 35.8651 | ETA 00:41:35
+Time 00:41:01 | Step 110854 / 200000 | TPS 36.1693 | ETA 00:41:04
+Time 00:41:11 | Step 111213 / 200000 | TPS 35.8639 | ETA 00:41:15
+Time 00:41:21 | Step 111572 / 200000 | TPS 35.8144 | ETA 00:41:09
+Time 00:41:31 | Step 111928 / 200000 | TPS 35.556 | ETA 00:41:16
+Time 00:41:41 | Step 112282 / 200000 | TPS 35.3098 | ETA 00:41:24
+Time 00:41:51 | Step 112633 / 200000 | TPS 35.082 | ETA 00:41:30
+Time 00:42:01 | Step 112981 / 200000 | TPS 34.7611 | ETA 00:41:43
+Time 00:42:11 | Step 113327 / 200000 | TPS 34.5801 | ETA 00:41:46
+Time 00:42:21 | Step 113671 / 200000 | TPS 34.3511 | ETA 00:41:53
+Time 00:42:31 | Step 114011 / 200000 | TPS 33.95 | ETA 00:42:12
+Time 00:42:41 | Step 114350 / 200000 | TPS 33.8516 | ETA 00:42:10
+Time 00:42:51 | Step 114686 / 200000 | TPS 33.5926 | ETA 00:42:19
+Time 00:43:01 | Step 115020 / 200000 | TPS 33.3716 | ETA 00:42:26
+Time 00:43:11 | Step 115352 / 200000 | TPS 33.1131 | ETA 00:42:36
+Time 00:43:22 | Step 115681 / 200000 | TPS 32.8399 | ETA 00:42:47
+Time 00:43:32 | Step 116009 / 200000 | TPS 32.7789 | ETA 00:42:42
+Time 00:43:42 | Step 116343 / 200000 | TPS 33.3629 | ETA 00:41:47
+Time 00:43:52 | Step 116678 / 200000 | TPS 33.4461 | ETA 00:41:31
+Time 00:44:02 | Step 117008 / 200000 | TPS 32.9534 | ETA 00:41:58
+Time 00:44:12 | Step 117339 / 200000 | TPS 33.0111 | ETA 00:41:44
+Time 00:44:22 | Step 117667 / 200000 | TPS 32.7688 | ETA 00:41:52
+Time 00:44:32 | Step 117992 / 200000 | TPS 32.4158 | ETA 00:42:09
+Time 00:44:42 | Step 118316 / 200000 | TPS 32.3482 | ETA 00:42:05
+Time 00:44:52 | Step 118638 / 200000 | TPS 32.1752 | ETA 00:42:08
+Time 00:45:02 | Step 118958 / 200000 | TPS 31.9494 | ETA 00:42:16
+Time 00:45:12 | Step 119274 / 200000 | TPS 31.5356 | ETA 00:42:39
+Time 00:45:22 | Step 119582 / 200000 | TPS 30.701 | ETA 00:43:39
+Time 00:45:32 | Step 119883 / 200000 | TPS 30.0489 | ETA 00:44:26
+Time 00:45:42 | Step 120183 / 200000 | TPS 29.9201 | ETA 00:44:27
+Time 00:45:52 | Step 120482 / 200000 | TPS 29.8153 | ETA 00:44:27
+Time 00:46:02 | Step 120779 / 200000 | TPS 29.643 | ETA 00:44:32
+Time 00:46:12 | Step 121074 / 200000 | TPS 29.4191 | ETA 00:44:42
+Time 00:46:22 | Step 121370 / 200000 | TPS 29.5246 | ETA 00:44:23
+Time 00:46:32 | Step 121666 / 200000 | TPS 29.5533 | ETA 00:44:10
+Time 00:46:42 | Step 121961 / 200000 | TPS 29.4924 | ETA 00:44:06
+Time 00:46:52 | Step 122257 / 200000 | TPS 29.53 | ETA 00:43:52
+Time 00:47:02 | Step 122553 / 200000 | TPS 29.5668 | ETA 00:43:39
+Time 00:47:12 | Step 122848 / 200000 | TPS 29.4727 | ETA 00:43:37
+Time 00:47:22 | Step 123144 / 200000 | TPS 29.5095 | ETA 00:43:24
+Time 00:47:32 | Step 123440 / 200000 | TPS 29.517 | ETA 00:43:13
+Time 00:47:42 | Step 123736 / 200000 | TPS 29.5499 | ETA 00:43:00
+Time 00:47:52 | Step 124032 / 200000 | TPS 29.5466 | ETA 00:42:51
+Time 00:48:02 | Step 124328 / 200000 | TPS 29.5036 | ETA 00:42:44
+Time 00:48:12 | Step 124622 / 200000 | TPS 29.3824 | ETA 00:42:45
+Time 00:48:22 | Step 124917 / 200000 | TPS 29.4896 | ETA 00:42:26
+Time 00:48:32 | Step 125212 / 200000 | TPS 29.4015 | ETA 00:42:23
+Time 00:48:42 | Step 125506 / 200000 | TPS 29.3651 | ETA 00:42:16
+Time 00:48:52 | Step 125800 / 200000 | TPS 29.327 | ETA 00:42:10
+Time 00:49:02 | Step 126093 / 200000 | TPS 29.2809 | ETA 00:42:04
+Time 00:49:12 | Step 126386 / 200000 | TPS 29.2391 | ETA 00:41:57
+Time 00:49:22 | Step 126679 / 200000 | TPS 29.2113 | ETA 00:41:50
+Time 00:49:32 | Step 126970 / 200000 | TPS 29.0478 | ETA 00:41:54
+Time 00:49:42 | Step 127262 / 200000 | TPS 29.1418 | ETA 00:41:35
+Time 00:49:52 | Step 127553 / 200000 | TPS 29.0642 | ETA 00:41:32
+Time 00:50:02 | Step 127844 / 200000 | TPS 29.0458 | ETA 00:41:24
+Time 00:50:12 | Step 128134 / 200000 | TPS 28.9587 | ETA 00:41:21
+Time 00:50:22 | Step 128424 / 200000 | TPS 28.9382 | ETA 00:41:13
+Time 00:50:32 | Step 128714 / 200000 | TPS 28.9414 | ETA 00:41:03
+Time 00:50:42 | Step 129004 / 200000 | TPS 28.9843 | ETA 00:40:49
+Time 00:50:52 | Step 129294 / 200000 | TPS 28.9423 | ETA 00:40:43
+Time 00:51:02 | Step 129584 / 200000 | TPS 28.938 | ETA 00:40:33
+Time 00:51:12 | Step 129874 / 200000 | TPS 28.924 | ETA 00:40:24
+Time 00:51:22 | Step 130165 / 200000 | TPS 29.0202 | ETA 00:40:06
+Time 00:51:32 | Step 130454 / 200000 | TPS 28.8736 | ETA 00:40:08
+Time 00:51:42 | Step 130744 / 200000 | TPS 28.98 | ETA 00:39:49
+Time 00:51:52 | Step 131035 / 200000 | TPS 29.0278 | ETA 00:39:35
+Time 00:52:02 | Step 131325 / 200000 | TPS 28.9546 | ETA 00:39:31
+Time 00:52:12 | Step 131616 / 200000 | TPS 29.0601 | ETA 00:39:13
+Time 00:52:23 | Step 131908 / 200000 | TPS 29.114 | ETA 00:38:58
+Time 00:52:33 | Step 132198 / 200000 | TPS 28.9918 | ETA 00:38:58
+Time 00:52:43 | Step 132488 / 200000 | TPS 28.9268 | ETA 00:38:53
+Time 00:52:53 | Step 132777 / 200000 | TPS 28.817 | ETA 00:38:52
+Time 00:53:03 | Step 133066 / 200000 | TPS 28.8659 | ETA 00:38:38
+Time 00:53:13 | Step 133356 / 200000 | TPS 28.9389 | ETA 00:38:22
+Time 00:53:23 | Step 133645 / 200000 | TPS 28.8832 | ETA 00:38:17
+Time 00:53:33 | Step 133934 / 200000 | TPS 28.827 | ETA 00:38:11
+Time 00:53:43 | Step 134223 / 200000 | TPS 28.8443 | ETA 00:38:00
+Time 00:53:53 | Step 134512 / 200000 | TPS 28.8691 | ETA 00:37:48
+Time 00:54:03 | Step 134802 / 200000 | TPS 28.9297 | ETA 00:37:33
+Time 00:54:13 | Step 135092 / 200000 | TPS 28.9047 | ETA 00:37:25
+Time 00:54:23 | Step 135382 / 200000 | TPS 28.9418 | ETA 00:37:12
+Time 00:54:33 | Step 135672 / 200000 | TPS 28.938 | ETA 00:37:02
+Time 00:54:43 | Step 135964 / 200000 | TPS 29.1363 | ETA 00:36:37
+Time 00:54:53 | Step 136255 / 200000 | TPS 29.0692 | ETA 00:36:32
+Time 00:55:03 | Step 136546 / 200000 | TPS 29.0468 | ETA 00:36:24
+Time 00:55:13 | Step 136836 / 200000 | TPS 28.9755 | ETA 00:36:19
+Time 00:55:23 | Step 137126 / 200000 | TPS 28.9658 | ETA 00:36:10
+Time 00:55:33 | Step 137415 / 200000 | TPS 28.8789 | ETA 00:36:07
+Time 00:55:43 | Step 137706 / 200000 | TPS 29.0576 | ETA 00:35:43
+Time 00:55:53 | Step 137996 / 200000 | TPS 28.9909 | ETA 00:35:38
+Time 00:56:03 | Step 138284 / 200000 | TPS 28.796 | ETA 00:35:43
+Time 00:56:13 | Step 138573 / 200000 | TPS 28.8658 | ETA 00:35:28
+Time 00:56:23 | Step 138863 / 200000 | TPS 28.9434 | ETA 00:35:12
+Time 00:56:33 | Step 139151 / 200000 | TPS 28.7999 | ETA 00:35:12
+Time 00:56:43 | Step 139439 / 200000 | TPS 28.7904 | ETA 00:35:03
+Time 00:56:53 | Step 139728 / 200000 | TPS 28.8599 | ETA 00:34:48
+Time 00:57:03 | Step 140017 / 200000 | TPS 28.8614 | ETA 00:34:38
+Time 00:57:13 | Step 140308 / 200000 | TPS 29.0243 | ETA 00:34:16
+Time 00:57:23 | Step 140598 / 200000 | TPS 28.9844 | ETA 00:34:09
+Time 00:57:33 | Step 140889 / 200000 | TPS 29.0749 | ETA 00:33:53
+Time 00:57:43 | Step 141179 / 200000 | TPS 28.9588 | ETA 00:33:51
+Time 00:57:53 | Step 141469 / 200000 | TPS 28.9226 | ETA 00:33:43
+Time 00:58:03 | Step 141760 / 200000 | TPS 29.0754 | ETA 00:33:23
+Time 00:58:13 | Step 142051 / 200000 | TPS 29.0535 | ETA 00:33:14
+Time 00:58:23 | Step 142340 / 200000 | TPS 28.88 | ETA 00:33:16
+Time 00:58:33 | Step 142628 / 200000 | TPS 28.7787 | ETA 00:33:13
+Time 00:58:43 | Step 142916 / 200000 | TPS 28.7832 | ETA 00:33:03
+Time 00:58:53 | Step 143206 / 200000 | TPS 28.984 | ETA 00:32:39
+Time 00:59:03 | Step 143497 / 200000 | TPS 29.0659 | ETA 00:32:23
+Time 00:59:13 | Step 143787 / 200000 | TPS 28.9174 | ETA 00:32:23
+Time 00:59:23 | Step 144078 / 200000 | TPS 29.0247 | ETA 00:32:06
+Time 00:59:33 | Step 144369 / 200000 | TPS 29.0326 | ETA 00:31:56
+Time 00:59:43 | Step 144659 / 200000 | TPS 28.9093 | ETA 00:31:54
+Time 00:59:53 | Step 144948 / 200000 | TPS 28.8918 | ETA 00:31:45
+Time 01:00:03 | Step 145238 / 200000 | TPS 28.9886 | ETA 00:31:29
+Time 01:00:13 | Step 145528 / 200000 | TPS 28.9964 | ETA 00:31:18
+Time 01:00:23 | Step 145818 / 200000 | TPS 28.9439 | ETA 00:31:11
+Time 01:00:33 | Step 146108 / 200000 | TPS 28.952 | ETA 00:31:01
+Time 01:00:43 | Step 146400 / 200000 | TPS 29.1137 | ETA 00:30:41
+Time 01:00:53 | Step 146690 / 200000 | TPS 28.9392 | ETA 00:30:42
+Time 01:01:03 | Step 146981 / 200000 | TPS 29.0464 | ETA 00:30:25
+Time 01:01:13 | Step 147272 / 200000 | TPS 29.0367 | ETA 00:30:15
+Time 01:01:23 | Step 147562 / 200000 | TPS 28.9968 | ETA 00:30:08
+Time 01:01:33 | Step 147854 / 200000 | TPS 29.1457 | ETA 00:29:49
+Time 01:01:43 | Step 148146 / 200000 | TPS 29.1127 | ETA 00:29:41
+Time 01:01:53 | Step 148437 / 200000 | TPS 29.0331 | ETA 00:29:36
+Time 01:02:03 | Step 148728 / 200000 | TPS 29.0116 | ETA 00:29:27
+Time 01:02:13 | Step 149019 / 200000 | TPS 28.9803 | ETA 00:29:19
+Time 01:02:23 | Step 149310 / 200000 | TPS 29.0592 | ETA 00:29:04
+Time 01:02:33 | Step 149601 / 200000 | TPS 29.0584 | ETA 00:28:54
+Time 01:02:43 | Step 149892 / 200000 | TPS 29.0441 | ETA 00:28:45
+Time 01:02:54 | Step 150183 / 200000 | TPS 29.0363 | ETA 00:28:35
+Time 01:03:04 | Step 150473 / 200000 | TPS 28.9347 | ETA 00:28:31
+Time 01:03:14 | Step 150764 / 200000 | TPS 29.0146 | ETA 00:28:16
+Time 01:03:24 | Step 151054 / 200000 | TPS 28.9354 | ETA 00:28:11
+Time 01:03:34 | Step 151344 / 200000 | TPS 28.9225 | ETA 00:28:02
+Time 01:03:44 | Step 151633 / 200000 | TPS 28.8914 | ETA 00:27:54
+Time 01:03:54 | Step 151923 / 200000 | TPS 28.9134 | ETA 00:27:42
+Time 01:04:04 | Step 152213 / 200000 | TPS 28.9166 | ETA 00:27:32
+Time 01:04:14 | Step 152502 / 200000 | TPS 28.8541 | ETA 00:27:26
+Time 01:04:24 | Step 152792 / 200000 | TPS 28.9155 | ETA 00:27:12
+Time 01:04:34 | Step 153081 / 200000 | TPS 28.8889 | ETA 00:27:04
+Time 01:04:44 | Step 153370 / 200000 | TPS 28.8316 | ETA 00:26:57
+Time 01:04:54 | Step 153659 / 200000 | TPS 28.8083 | ETA 00:26:48
+Time 01:05:04 | Step 153947 / 200000 | TPS 28.7913 | ETA 00:26:39
+Time 01:05:14 | Step 154236 / 200000 | TPS 28.8819 | ETA 00:26:24
+Time 01:05:24 | Step 154525 / 200000 | TPS 28.8158 | ETA 00:26:18
+Time 01:05:34 | Step 154813 / 200000 | TPS 28.7882 | ETA 00:26:09
+Time 01:05:44 | Step 155102 / 200000 | TPS 28.8775 | ETA 00:25:54
+Time 01:05:54 | Step 155392 / 200000 | TPS 28.8946 | ETA 00:25:43
+Time 01:06:04 | Step 155682 / 200000 | TPS 28.9523 | ETA 00:25:30
+Time 01:06:14 | Step 155972 / 200000 | TPS 28.9525 | ETA 00:25:20
+Time 01:06:24 | Step 156262 / 200000 | TPS 28.9121 | ETA 00:25:12
+Time 01:06:34 | Step 156552 / 200000 | TPS 28.9303 | ETA 00:25:01
+Time 01:06:44 | Step 156843 / 200000 | TPS 29.018 | ETA 00:24:47
+Time 01:06:54 | Step 157134 / 200000 | TPS 29.0262 | ETA 00:24:36
+Time 01:07:04 | Step 157424 / 200000 | TPS 28.9675 | ETA 00:24:29
+Time 01:07:14 | Step 157714 / 200000 | TPS 28.9238 | ETA 00:24:21
+Time 01:07:24 | Step 158003 / 200000 | TPS 28.8739 | ETA 00:24:14
+Time 01:07:34 | Step 158293 / 200000 | TPS 28.9629 | ETA 00:24:00
+Time 01:07:44 | Step 158583 / 200000 | TPS 28.9624 | ETA 00:23:50
+Time 01:07:54 | Step 158873 / 200000 | TPS 28.9239 | ETA 00:23:41
+Time 01:08:04 | Step 159162 / 200000 | TPS 28.823 | ETA 00:23:36
+Time 01:08:14 | Step 159449 / 200000 | TPS 28.6945 | ETA 00:23:33
+Time 01:08:24 | Step 159738 / 200000 | TPS 28.8149 | ETA 00:23:17
+Time 01:08:34 | Step 160026 / 200000 | TPS 28.724 | ETA 00:23:11
+Time 01:08:44 | Step 160314 / 200000 | TPS 28.7435 | ETA 00:23:00
+Time 01:08:54 | Step 160602 / 200000 | TPS 28.7515 | ETA 00:22:50
+Time 01:09:04 | Step 160891 / 200000 | TPS 28.8065 | ETA 00:22:37
+Time 01:09:14 | Step 161180 / 200000 | TPS 28.8085 | ETA 00:22:27
+Time 01:09:24 | Step 161469 / 200000 | TPS 28.8088 | ETA 00:22:17
+Time 01:09:34 | Step 161758 / 200000 | TPS 28.8319 | ETA 00:22:06
+Time 01:09:44 | Step 162048 / 200000 | TPS 28.8988 | ETA 00:21:53
+Time 01:09:54 | Step 162338 / 200000 | TPS 28.9424 | ETA 00:21:41
+Time 01:10:04 | Step 162627 / 200000 | TPS 28.8089 | ETA 00:21:37
+Time 01:10:14 | Step 162916 / 200000 | TPS 28.8553 | ETA 00:21:25
+Time 01:10:24 | Step 163205 / 200000 | TPS 28.8648 | ETA 00:21:14
+Time 01:10:34 | Step 163495 / 200000 | TPS 28.9711 | ETA 00:21:00
+Time 01:10:45 | Step 163785 / 200000 | TPS 28.9256 | ETA 00:20:52
+Time 01:10:55 | Step 164074 / 200000 | TPS 28.8706 | ETA 00:20:44
+Time 01:11:05 | Step 164364 / 200000 | TPS 28.9043 | ETA 00:20:32
+Time 01:11:15 | Step 164654 / 200000 | TPS 28.9237 | ETA 00:20:22
+Time 01:11:25 | Step 164943 / 200000 | TPS 28.8862 | ETA 00:20:13
+Time 01:11:35 | Step 165233 / 200000 | TPS 28.9265 | ETA 00:20:01
+Time 01:11:45 | Step 165521 / 200000 | TPS 28.7542 | ETA 00:19:59
+Time 01:11:55 | Step 165810 / 200000 | TPS 28.8871 | ETA 00:19:43
+Time 01:12:05 | Step 166099 / 200000 | TPS 28.8383 | ETA 00:19:35
+Time 01:12:15 | Step 166387 / 200000 | TPS 28.7163 | ETA 00:19:30
+Time 01:12:25 | Step 166675 / 200000 | TPS 28.7572 | ETA 00:19:18
+Time 01:12:35 | Step 166962 / 200000 | TPS 28.6948 | ETA 00:19:11
+Time 01:12:45 | Step 167250 / 200000 | TPS 28.758 | ETA 00:18:58
+Time 01:12:55 | Step 167538 / 200000 | TPS 28.7238 | ETA 00:18:50
+Time 01:13:05 | Step 167827 / 200000 | TPS 28.8216 | ETA 00:18:36
+Time 01:13:15 | Step 168116 / 200000 | TPS 28.8336 | ETA 00:18:25
+Time 01:13:25 | Step 168404 / 200000 | TPS 28.7899 | ETA 00:18:17
+Time 01:13:35 | Step 168693 / 200000 | TPS 28.8694 | ETA 00:18:04
+Time 01:13:45 | Step 168981 / 200000 | TPS 28.7653 | ETA 00:17:58
+Time 01:13:55 | Step 169269 / 200000 | TPS 28.7908 | ETA 00:17:47
+Time 01:14:05 | Step 169557 / 200000 | TPS 28.7891 | ETA 00:17:37
+Time 01:14:15 | Step 169846 / 200000 | TPS 28.8067 | ETA 00:17:26
+Time 01:14:25 | Step 170135 / 200000 | TPS 28.8316 | ETA 00:17:15
+Time 01:14:35 | Step 170423 / 200000 | TPS 28.7762 | ETA 00:17:07
+Time 01:14:45 | Step 170711 / 200000 | TPS 28.7922 | ETA 00:16:57
+Time 01:14:55 | Step 171001 / 200000 | TPS 28.8227 | ETA 00:16:46
+Time 01:15:05 | Step 171292 / 200000 | TPS 29.0027 | ETA 00:16:29
+Time 01:15:15 | Step 171579 / 200000 | TPS 28.6795 | ETA 00:16:30
+Time 01:15:25 | Step 171868 / 200000 | TPS 28.8593 | ETA 00:16:14
+Time 01:15:35 | Step 172156 / 200000 | TPS 28.7419 | ETA 00:16:08
+Time 01:15:45 | Step 172445 / 200000 | TPS 28.8356 | ETA 00:15:55
+Time 01:15:55 | Step 172734 / 200000 | TPS 28.8356 | ETA 00:15:45
+Time 01:16:05 | Step 173022 / 200000 | TPS 28.7501 | ETA 00:15:38
+Time 01:16:15 | Step 173310 / 200000 | TPS 28.7668 | ETA 00:15:27
+Time 01:16:25 | Step 173598 / 200000 | TPS 28.7074 | ETA 00:15:19
+Time 01:16:35 | Step 173886 / 200000 | TPS 28.751 | ETA 00:15:08
+Time 01:16:45 | Step 174174 / 200000 | TPS 28.7201 | ETA 00:14:59
+Time 01:16:55 | Step 174462 / 200000 | TPS 28.7065 | ETA 00:14:49
+Time 01:17:05 | Step 174750 / 200000 | TPS 28.7856 | ETA 00:14:37
+Time 01:17:15 | Step 175040 / 200000 | TPS 28.9094 | ETA 00:14:23
+Time 01:17:25 | Step 175328 / 200000 | TPS 28.7423 | ETA 00:14:18
+Time 01:17:35 | Step 175615 / 200000 | TPS 28.6033 | ETA 00:14:12
+Time 01:17:45 | Step 175903 / 200000 | TPS 28.7295 | ETA 00:13:58
+Time 01:17:55 | Step 176191 / 200000 | TPS 28.7569 | ETA 00:13:47
+Time 01:18:05 | Step 176479 / 200000 | TPS 28.7689 | ETA 00:13:37
+Time 01:18:15 | Step 176768 / 200000 | TPS 28.8083 | ETA 00:13:26
+Time 01:18:25 | Step 177057 / 200000 | TPS 28.8186 | ETA 00:13:16
+Time 01:18:35 | Step 177346 / 200000 | TPS 28.8435 | ETA 00:13:05
+Time 01:18:45 | Step 177636 / 200000 | TPS 28.93 | ETA 00:12:53
+Time 01:18:55 | Step 177925 / 200000 | TPS 28.8236 | ETA 00:12:45
+Time 01:19:05 | Step 178214 / 200000 | TPS 28.8988 | ETA 00:12:33
+Time 01:19:15 | Step 178503 / 200000 | TPS 28.841 | ETA 00:12:25
+Time 01:19:26 | Step 178792 / 200000 | TPS 28.8168 | ETA 00:12:15
+Time 01:19:36 | Step 179080 / 200000 | TPS 28.759 | ETA 00:12:07
+Time 01:19:46 | Step 179367 / 200000 | TPS 28.6494 | ETA 00:12:00
+Time 01:19:56 | Step 179654 / 200000 | TPS 28.6711 | ETA 00:11:49
+Time 01:20:06 | Step 179941 / 200000 | TPS 28.6226 | ETA 00:11:40
+Time 01:20:16 | Step 180228 / 200000 | TPS 28.6233 | ETA 00:11:30
+Time 01:20:26 | Step 180516 / 200000 | TPS 28.7267 | ETA 00:11:18
+Time 01:20:36 | Step 180804 / 200000 | TPS 28.743 | ETA 00:11:07
+Time 01:20:46 | Step 181092 / 200000 | TPS 28.7782 | ETA 00:10:57
+Time 01:20:56 | Step 181381 / 200000 | TPS 28.807 | ETA 00:10:46
+Time 01:21:06 | Step 181669 / 200000 | TPS 28.7452 | ETA 00:10:37
+Time 01:21:16 | Step 181956 / 200000 | TPS 28.6954 | ETA 00:10:28
+Time 01:21:26 | Step 182243 / 200000 | TPS 28.6966 | ETA 00:10:18
+Time 01:21:36 | Step 182530 / 200000 | TPS 28.6901 | ETA 00:10:08
+Time 01:21:46 | Step 182818 / 200000 | TPS 28.7793 | ETA 00:09:57
+Time 01:21:56 | Step 183106 / 200000 | TPS 28.7734 | ETA 00:09:47
+Time 01:22:06 | Step 183393 / 200000 | TPS 28.6169 | ETA 00:09:40
+Time 01:22:16 | Step 183681 / 200000 | TPS 28.7805 | ETA 00:09:27
+Time 01:22:26 | Step 183969 / 200000 | TPS 28.7809 | ETA 00:09:17
+Time 01:22:36 | Step 184258 / 200000 | TPS 28.8904 | ETA 00:09:04
+Time 01:22:46 | Step 184547 / 200000 | TPS 28.8296 | ETA 00:08:56
+Time 01:22:56 | Step 184836 / 200000 | TPS 28.8129 | ETA 00:08:46
+Time 01:23:06 | Step 185124 / 200000 | TPS 28.7895 | ETA 00:08:36
+Time 01:23:16 | Step 185412 / 200000 | TPS 28.7158 | ETA 00:08:28
+Time 01:23:26 | Step 185700 / 200000 | TPS 28.7684 | ETA 00:08:17
+Time 01:23:36 | Step 185988 / 200000 | TPS 28.7139 | ETA 00:08:07
+Time 01:23:46 | Step 186275 / 200000 | TPS 28.6587 | ETA 00:07:58
+Time 01:23:56 | Step 186563 / 200000 | TPS 28.7312 | ETA 00:07:47
+Time 01:24:06 | Step 186850 / 200000 | TPS 28.6882 | ETA 00:07:38
+Time 01:24:16 | Step 187137 / 200000 | TPS 28.6871 | ETA 00:07:28
+Time 01:24:26 | Step 187425 / 200000 | TPS 28.7237 | ETA 00:07:17
+Time 01:24:36 | Step 187711 / 200000 | TPS 28.5875 | ETA 00:07:09
+Time 01:24:46 | Step 187998 / 200000 | TPS 28.6127 | ETA 00:06:59
+Time 01:24:56 | Step 188286 / 200000 | TPS 28.7672 | ETA 00:06:47
+Time 01:25:06 | Step 188575 / 200000 | TPS 28.84 | ETA 00:06:36
+Time 01:25:16 | Step 188864 / 200000 | TPS 28.8469 | ETA 00:06:26
+Time 01:25:26 | Step 189153 / 200000 | TPS 28.8593 | ETA 00:06:15
+Time 01:25:36 | Step 189442 / 200000 | TPS 28.8936 | ETA 00:06:05
+Time 01:25:46 | Step 189731 / 200000 | TPS 28.8735 | ETA 00:05:55
+Time 01:25:56 | Step 190020 / 200000 | TPS 28.8698 | ETA 00:05:45
+Time 01:26:06 | Step 190309 / 200000 | TPS 28.8219 | ETA 00:05:36
+Time 01:26:16 | Step 190598 / 200000 | TPS 28.8521 | ETA 00:05:25
+Time 01:26:26 | Step 190886 / 200000 | TPS 28.774 | ETA 00:05:16
+Time 01:26:36 | Step 191173 / 200000 | TPS 28.6437 | ETA 00:05:08
+Time 01:26:46 | Step 191460 / 200000 | TPS 28.6791 | ETA 00:04:57
+Time 01:26:56 | Step 191746 / 200000 | TPS 28.5497 | ETA 00:04:49
+Time 01:27:06 | Step 192033 / 200000 | TPS 28.6225 | ETA 00:04:38
+Time 01:27:16 | Step 192320 / 200000 | TPS 28.6239 | ETA 00:04:28
+Time 01:27:26 | Step 192606 / 200000 | TPS 28.5473 | ETA 00:04:19
+Time 01:27:36 | Step 192894 / 200000 | TPS 28.7082 | ETA 00:04:07
+Time 01:27:46 | Step 193181 / 200000 | TPS 28.6608 | ETA 00:03:57
+Time 01:27:56 | Step 193468 / 200000 | TPS 28.682 | ETA 00:03:47
+Time 01:28:06 | Step 193756 / 200000 | TPS 28.745 | ETA 00:03:37
+Time 01:28:16 | Step 194043 / 200000 | TPS 28.69 | ETA 00:03:27
+Time 01:28:26 | Step 194331 / 200000 | TPS 28.7636 | ETA 00:03:17
+Time 01:28:36 | Step 194619 / 200000 | TPS 28.7602 | ETA 00:03:07
+Time 01:28:46 | Step 194908 / 200000 | TPS 28.8424 | ETA 00:02:56
+Time 01:28:56 | Step 195196 / 200000 | TPS 28.772 | ETA 00:02:46
+Time 01:29:06 | Step 195485 / 200000 | TPS 28.8174 | ETA 00:02:36
+Time 01:29:16 | Step 195774 / 200000 | TPS 28.8805 | ETA 00:02:26
+Time 01:29:26 | Step 196063 / 200000 | TPS 28.8411 | ETA 00:02:16
+Time 01:29:36 | Step 196351 / 200000 | TPS 28.7395 | ETA 00:02:06
+Time 01:29:47 | Step 196639 / 200000 | TPS 28.7433 | ETA 00:01:56
+Time 01:29:57 | Step 196927 / 200000 | TPS 28.773 | ETA 00:01:46
+Time 01:30:07 | Step 197215 / 200000 | TPS 28.7551 | ETA 00:01:36
+Time 01:30:17 | Step 197503 / 200000 | TPS 28.7193 | ETA 00:01:26
+Time 01:30:27 | Step 197790 / 200000 | TPS 28.6075 | ETA 00:01:17
+Time 01:30:37 | Step 198077 / 200000 | TPS 28.6813 | ETA 00:01:07
+Time 01:30:47 | Step 198363 / 200000 | TPS 28.5392 | ETA 00:00:57
+Time 01:30:57 | Step 198649 / 200000 | TPS 28.5975 | ETA 00:00:47
+Time 01:31:07 | Step 198935 / 200000 | TPS 28.5719 | ETA 00:00:37
+Time 01:31:17 | Step 199286 / 200000 | TPS 35.0694 | ETA 00:00:20
+Time 01:31:27 | Step 199893 / 200000 | TPS 60.6966 | ETA 00:00:01
+Time 01:31:29 | Step 200000 / 200000 | TPS 55.4345 | ETA 00:00:00
+Average TPS: 30.0516
+---------
+-- Neighborlist stats:
+1217 normal updates / 334 forced updates / 0 dangerous updates
+n_neigh_min: 763 / n_neigh_max: 866 / n_neigh_avg: 806.856
+shortest rebuild period: 27
+-- Cell list stats:
+Dimension: 3, 3, 3
+n_min    : 210 / n_max: 240 / n_avg: 222.222
+-- Neighborlist stats:
+0 normal updates / 0 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 0 / n_neigh_avg: 0
+shortest rebuild period: 100
+-- Cell list stats:
+Dimension: 0, 0, 0
+** run complete **

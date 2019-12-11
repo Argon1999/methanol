@@ -1,0 +1,27 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=96:00:00
+#PBS -N $PBS_JOBID
+#PBS -e $PBS_JOBID.err
+#PBS -o $PBS_JOBID.out
+#PBS -j oe
+##PBS -W depend=afterany:891
+#PBS -V
+cd $PBS_O_WORKDIR
+
+
+# This gives you the best GPU on Hulk, and 6/8 threads
+# If you can, try to limit yourself to this setting
+# analysis can always be run when logged in.
+# or on mac if the data is rsync'd over
+
+# -nt = num threads
+# NOTE: If you use less than 6 threads, change "ppn" up top as well.
+# -pin = manually pinning the GPU, so GROMACS does not do it manually
+# -nb = calc non-bonded forces on GPU
+# -gpu_id = GPU to use (This is a GTX 680
+
+
+module load anaconda/5.1.0
+source activate mosdef36
+python alex.py -nb gpu -gpu_id 1
